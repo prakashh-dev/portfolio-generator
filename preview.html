@@ -1,0 +1,2994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Portfolio Preview - Portify</title>
+
+<style>
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080816;
+    color: white;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: rgba(124,58,237,0.12);
+
+    filter: blur(110px);
+
+    top: -180px;
+    left: -150px;
+
+    animation: floatOne 9s ease-in-out infinite;
+
+    pointer-events: none;
+
+    z-index: -2;
+}
+
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background: rgba(6,182,212,0.10);
+
+    filter: blur(110px);
+
+    right: -160px;
+    bottom: -150px;
+
+    animation: floatTwo 11s ease-in-out infinite;
+
+    pointer-events: none;
+
+    z-index: -2;
+}
+
+
+@keyframes floatOne {
+
+    0%,100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(100px,80px);
+    }
+}
+
+
+@keyframes floatTwo {
+
+    0%,100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(-90px,-70px);
+    }
+}
+
+
+/* =========================================
+   TOP NAVIGATION
+========================================= */
+
+.topbar {
+
+    width: 100%;
+
+    padding: 18px 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background:
+        rgba(8,8,22,0.88);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+
+.logo {
+
+    font-size: 27px;
+
+    font-weight: 800;
+}
+
+
+.logo span {
+    color: #9b5cff;
+}
+
+
+.top-actions {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.action-btn {
+
+    padding: 10px 17px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    color: #c9c3d5;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+
+.action-btn:hover {
+
+    color: white;
+
+    border-color: #9b5cff;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.action-btn.primary {
+
+    border: none;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            100deg,
+            #823cff,
+            #e93f9c
+        );
+}
+
+
+/* =========================================
+   PORTFOLIO
+========================================= */
+
+.portfolio {
+
+    max-width: 1050px;
+
+    margin: 40px auto 70px;
+
+    padding: 0 20px;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+
+    padding: 55px 45px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,0.17),
+            rgba(236,72,153,0.08),
+            rgba(6,182,212,0.06)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 40px;
+
+    animation:
+        fadeUp
+        0.7s
+        ease;
+}
+
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(155,92,255,0.10);
+
+    filter: blur(60px);
+
+    right: -70px;
+    top: -80px;
+}
+
+
+.profile-photo {
+
+    width: 155px;
+    height: 155px;
+
+    min-width: 155px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border:
+        4px solid
+        rgba(155,92,255,0.55);
+
+    box-shadow:
+        0 0 35px
+        rgba(124,58,237,0.30);
+}
+
+
+.profile-placeholder {
+
+    width: 155px;
+    height: 155px;
+
+    min-width: 155px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 55px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        );
+
+    border:
+        4px solid
+        rgba(255,255,255,0.10);
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.hero-content .small-title {
+
+    color: #b18cff;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+
+.hero-content h1 {
+
+    font-size: 42px;
+
+    line-height: 1.1;
+
+    margin-bottom: 10px;
+}
+
+
+.hero-content h2 {
+
+    font-size: 19px;
+
+    color: #c4bdd2;
+
+    font-weight: normal;
+
+    margin-bottom: 17px;
+}
+
+
+.contact-row {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+
+.contact-item {
+
+    padding: 8px 11px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(0,0,0,0.22);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    color: #aaa5b8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.section {
+
+    margin-top: 25px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.09);
+
+    backdrop-filter: blur(18px);
+
+    animation:
+        fadeUp
+        0.7s
+        ease;
+}
+
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.section-icon {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        );
+
+    font-size: 17px;
+}
+
+
+.section-title h2 {
+
+    font-size: 20px;
+}
+
+
+.section-title p {
+
+    color: #858092;
+
+    font-size: 11px;
+
+    margin-top: 3px;
+}
+
+
+.empty {
+
+    color: #777386;
+
+    font-size: 13px;
+
+    padding: 15px 0;
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+.about-text {
+
+    color: #bcb6c8;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================
+   EDUCATION
+========================================= */
+
+.education-item {
+
+    padding: 20px;
+
+    margin-bottom: 14px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(0,0,0,0.17);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.07);
+}
+
+
+.education-item:last-child {
+    margin-bottom: 0;
+}
+
+
+.education-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.education-degree {
+
+    color: #d9caff;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+
+.education-institution {
+
+    color: #aaa5b8;
+
+    font-size: 13px;
+
+    margin-top: 6px;
+}
+
+
+.education-year {
+
+    color: #b18cff;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+
+.education-meta {
+
+    color: #858092;
+
+    font-size: 11px;
+
+    margin-top: 9px;
+}
+
+
+.education-description {
+
+    color: #aaa5b8;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-top: 12px;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================
+   SKILLS
+========================================= */
+
+.skill-group {
+
+    margin-bottom: 22px;
+}
+
+
+.skill-group:last-child {
+    margin-bottom: 0;
+}
+
+
+.skill-group-title {
+
+    font-size: 14px;
+
+    color: #d8c9ff;
+
+    margin-bottom: 13px;
+}
+
+
+.skills-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 13px;
+}
+
+
+.skill-card {
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(0,0,0,0.17);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.07);
+}
+
+
+.skill-card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+
+.skill-name {
+
+    font-size: 12px;
+
+    color: #d2ccdb;
+}
+
+
+.skill-level {
+
+    color: #b18cff;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.progress {
+
+    width: 100%;
+
+    height: 5px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,0.08);
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #ec4899
+        );
+}
+
+
+/* =========================================
+   PROJECTS
+========================================= */
+
+.project-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 18px;
+}
+
+
+.project-card {
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background:
+        rgba(0,0,0,0.18);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    transition: 0.3s;
+}
+
+
+.project-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(155,92,255,0.30);
+
+    box-shadow:
+        0 20px 40px
+        rgba(0,0,0,0.25);
+}
+
+
+.project-photo {
+
+    width: 100%;
+
+    height: 190px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.project-no-photo {
+
+    height: 150px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,0.20),
+            rgba(236,72,153,0.12)
+        );
+}
+
+
+.project-content {
+
+    padding: 20px;
+}
+
+
+.project-content h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 8px;
+}
+
+
+.project-tech {
+
+    color: #b18cff;
+
+    font-size: 11px;
+
+    margin-bottom: 11px;
+}
+
+
+.project-description {
+
+    color: #aaa5b8;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================
+   EXPERIENCE
+========================================= */
+
+.experience-item {
+
+    position: relative;
+
+    padding: 20px;
+
+    margin-bottom: 14px;
+
+    border-left:
+        3px solid
+        #8b5cf6;
+
+    border-radius: 0 14px 14px 0;
+
+    background:
+        rgba(0,0,0,0.17);
+}
+
+
+.experience-item:last-child {
+    margin-bottom: 0;
+}
+
+
+.experience-head {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.experience-type {
+
+    color: #b18cff;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+.experience-company {
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    margin-top: 6px;
+}
+
+
+.experience-date {
+
+    color: #858092;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+
+.experience-location {
+
+    color: #aaa5b8;
+
+    font-size: 11px;
+
+    margin-top: 7px;
+}
+
+
+.experience-description {
+
+    color: #aaa5b8;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-top: 12px;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================
+   CERTIFICATIONS
+========================================= */
+
+.cert-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 15px;
+}
+
+
+.cert-card {
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(0,0,0,0.17);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.07);
+}
+
+
+.cert-card h3 {
+
+    font-size: 14px;
+
+    color: #d8c9ff;
+
+    margin-bottom: 8px;
+}
+
+
+.cert-description {
+
+    color: #aaa5b8;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    white-space: pre-line;
+}
+
+
+.cert-download {
+
+    display: inline-block;
+
+    margin-top: 13px;
+
+    padding: 8px 11px;
+
+    border-radius: 8px;
+
+    color: #cbb9ff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    background:
+        rgba(139,92,246,0.08);
+
+    border:
+        1px solid
+        rgba(155,92,255,0.20);
+}
+
+
+/* =========================================
+   RESUME
+========================================= */
+
+.resume-box {
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,0.12),
+            rgba(236,72,153,0.07)
+        );
+
+    border:
+        1px solid
+        rgba(155,92,255,0.18);
+}
+
+
+.resume-info strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+
+.resume-info span {
+
+    color: #858092;
+
+    font-size: 11px;
+}
+
+
+.resume-btn {
+
+    padding: 10px 15px;
+
+    border-radius: 9px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+    background:
+        linear-gradient(
+            100deg,
+            #823cff,
+            #e93f9c
+        );
+}
+
+
+/* =========================================
+   SOCIAL
+========================================= */
+
+.social-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 13px;
+}
+
+
+.social-link {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    color: #bbb5c5;
+
+    text-decoration: none;
+
+    background:
+        rgba(0,0,0,0.17);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.07);
+
+    transition: 0.3s;
+}
+
+
+.social-link:hover {
+
+    color: white;
+
+    border-color:
+        rgba(155,92,255,0.35);
+
+    transform:
+        translateY(-2px);
+}
+
+
+.social-icon {
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(124,58,237,0.16);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+
+    text-align: center;
+
+    padding: 30px 20px;
+
+    color: #625d6d;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+@media print {
+
+    body {
+
+        background: white;
+
+        color: black;
+    }
+
+    body::before,
+    body::after {
+
+        display: none;
+    }
+
+    .topbar {
+
+        display: none;
+    }
+
+    .portfolio {
+
+        max-width: 100%;
+
+        margin: 0;
+
+        padding: 0;
+    }
+
+    .hero,
+    .section {
+
+        color: black;
+
+        background: white;
+
+        border: 1px solid #ddd;
+
+        box-shadow: none;
+
+        break-inside: avoid;
+    }
+
+    .hero-content h2,
+    .about-text,
+    .education-institution,
+    .education-meta,
+    .education-description,
+    .project-description,
+    .experience-location,
+    .experience-description,
+    .cert-description,
+    .resume-info span {
+
+        color: #444;
+    }
+
+    .footer {
+
+        color: #555;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .topbar {
+
+        padding: 15px 20px;
+    }
+
+    .portfolio {
+
+        margin-top: 25px;
+    }
+
+    .hero {
+
+        padding: 35px 25px;
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .contact-row {
+
+        justify-content: center;
+    }
+
+    .hero-content h1 {
+
+        font-size: 34px;
+    }
+
+    .project-grid,
+    .cert-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .skills-list {
+
+        grid-template-columns: 1fr;
+    }
+
+    .social-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .education-top,
+    .experience-head,
+    .resume-box {
+
+        flex-direction: column;
+    }
+
+    .education-year,
+    .experience-date {
+
+        white-space: normal;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .logo {
+
+        font-size: 23px;
+    }
+
+    .top-actions {
+
+        gap: 5px;
+    }
+
+    .action-btn {
+
+        padding: 8px 10px;
+
+        font-size: 10px;
+    }
+
+    .section {
+
+        padding: 20px;
+    }
+
+    .hero {
+
+        padding: 30px 18px;
+    }
+
+    .profile-photo,
+    .profile-placeholder {
+
+        width: 120px;
+        height: 120px;
+
+        min-width: 120px;
+    }
+
+    .hero-content h1 {
+
+        font-size: 28px;
+    }
+
+}
+
+
+/* =========================================
+   HIDE EMPTY SECTIONS
+========================================= */
+
+.section.hidden {
+    display: none;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     TOPBAR
+========================================= -->
+
+<header class="topbar">
+
+    <div class="logo">
+        <span>Port</span>ify
+    </div>
+
+
+    <div class="top-actions">
+
+        <a
+            href="create.html"
+            class="action-btn">
+
+            ✏️ Edit
+
+        </a>
+
+
+        <button
+            class="action-btn primary"
+            onclick="window.print()">
+
+            🖨 Print / PDF
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================
+     PORTFOLIO
+========================================= -->
+
+<main class="portfolio">
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero">
+
+
+    <div id="profilePhotoBox">
+
+        <div class="profile-placeholder">
+            👨‍💻
+        </div>
+
+    </div>
+
+
+    <div class="hero-content">
+
+
+        <div class="small-title">
+            Portfolio
+        </div>
+
+
+        <h1 id="portfolioName">
+            Your Name
+        </h1>
+
+
+        <h2 id="portfolioJob">
+            Your Professional Role
+        </h2>
+
+
+        <div class="contact-row">
+
+
+            <div
+                class="contact-item"
+                id="emailBox">
+
+                📧 <span id="portfolioEmail">
+                    Email
+                </span>
+
+            </div>
+
+
+            <div
+                class="contact-item"
+                id="phoneBox">
+
+                📱 <span id="portfolioPhone">
+                    Phone
+                </span>
+
+            </div>
+
+
+            <div
+                class="contact-item"
+                id="locationBox">
+
+                📍 <span id="portfolioLocation">
+                    Location
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     ABOUT
+========================================= -->
+
+<section
+    class="section"
+    id="aboutSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            👤
+        </div>
+
+        <div>
+
+            <h2 id="aboutTitle">
+                About Me
+            </h2>
+
+            <p>
+                Professional introduction
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="about-text"
+        id="aboutContent">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     EDUCATION
+========================================= -->
+
+<section
+    class="section"
+    id="educationSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            🎓
+        </div>
+
+        <div>
+
+            <h2>
+                Education
+            </h2>
+
+            <p>
+                Educational qualifications
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div id="educationList"></div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     SKILLS
+========================================= -->
+
+<section
+    class="section"
+    id="skillsSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            ⚡
+        </div>
+
+        <div>
+
+            <h2>
+                Skills
+            </h2>
+
+            <p>
+                Professional skill set
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div id="skillsContent"></div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     PROJECTS
+========================================= -->
+
+<section
+    class="section"
+    id="projectsSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            📁
+        </div>
+
+        <div>
+
+            <h2>
+                Projects
+            </h2>
+
+            <p>
+                Academic and professional projects
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="project-grid"
+        id="projectList">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     EXPERIENCE
+========================================= -->
+
+<section
+    class="section"
+    id="experienceSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            💼
+        </div>
+
+        <div>
+
+            <h2>
+                Internship / Experience
+            </h2>
+
+            <p>
+                Professional experience
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div id="experienceList"></div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     RESUME
+========================================= -->
+
+<section
+    class="section"
+    id="resumeSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            📄
+        </div>
+
+        <div>
+
+            <h2>
+                Resume
+            </h2>
+
+            <p>
+                Download my resume
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="resume-box">
+
+
+        <div class="resume-info">
+
+            <strong id="resumeName">
+                Resume
+            </strong>
+
+            <span>
+                Click the button to download
+            </span>
+
+        </div>
+
+
+        <a
+            href="#"
+            class="resume-btn"
+            id="resumeButton">
+
+            ⬇ Download Resume
+
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     CERTIFICATIONS
+========================================= -->
+
+<section
+    class="section"
+    id="certificationSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            🏆
+        </div>
+
+        <div>
+
+            <h2>
+                Certifications
+            </h2>
+
+            <p>
+                Professional certifications
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="cert-grid"
+        id="certificationList">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     SOCIAL LINKS
+========================================= -->
+
+<section
+    class="section"
+    id="socialSection">
+
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            🔗
+        </div>
+
+        <div>
+
+            <h2>
+                Social & Professional Links
+            </h2>
+
+            <p>
+                Connect with me online
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="social-grid"
+        id="socialList">
+
+    </div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer class="footer">
+
+    Created with ❤️ using Portify
+
+</footer>
+
+
+
+<script>
+
+/* =========================================
+   GET PORTFOLIO DATA
+========================================= */
+
+const savedData =
+    localStorage.getItem(
+        "portifyPortfolio"
+    );
+
+
+/* =========================================
+   CHECK DATA
+========================================= */
+
+if (!savedData) {
+
+    alert(
+        "No portfolio data found. Please create your portfolio first."
+    );
+
+    window.location.href =
+        "create.html";
+
+}
+
+
+/* =========================================
+   PARSE DATA
+========================================= */
+
+let data;
+
+try {
+
+    data =
+        JSON.parse(savedData);
+
+}
+
+catch(error) {
+
+    alert(
+        "Portfolio data is corrupted. Please create again."
+    );
+
+    window.location.href =
+        "create.html";
+
+}
+
+
+/* =========================================
+   HELPER
+========================================= */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================
+   PERSONAL INFORMATION
+========================================= */
+
+function loadPersonal() {
+
+    if (!data.personal) {
+        return;
+    }
+
+
+    const name =
+        data.personal.name ||
+        "Your Name";
+
+
+    const job =
+        data.personal.jobTitle ||
+        "Your Professional Role";
+
+
+    document.getElementById(
+        "portfolioName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "portfolioJob"
+    ).textContent =
+        job;
+
+
+    if (data.personal.email) {
+
+        document.getElementById(
+            "portfolioEmail"
+        ).textContent =
+            data.personal.email;
+
+    }
+
+    else {
+
+        document.getElementById(
+            "emailBox"
+        ).style.display =
+            "none";
+
+    }
+
+
+    if (data.personal.phone) {
+
+        document.getElementById(
+            "portfolioPhone"
+        ).textContent =
+            data.personal.phone;
+
+    }
+
+    else {
+
+        document.getElementById(
+            "phoneBox"
+        ).style.display =
+            "none";
+
+    }
+
+
+    if (data.personal.location) {
+
+        document.getElementById(
+            "portfolioLocation"
+        ).textContent =
+            data.personal.location;
+
+    }
+
+    else {
+
+        document.getElementById(
+            "locationBox"
+        ).style.display =
+            "none";
+
+    }
+
+
+    /* PROFILE PHOTO */
+
+    if (
+        data.personal.profilePhoto
+    ) {
+
+        const box =
+            document.getElementById(
+                "profilePhotoBox"
+            );
+
+
+        box.innerHTML = `
+
+            <img
+                src="${data.personal.profilePhoto}"
+                class="profile-photo"
+                alt="Profile Photo">
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+function loadAbout() {
+
+    if (
+        !data.about ||
+        !data.about.text
+    ) {
+
+        document.getElementById(
+            "aboutSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "aboutTitle"
+    ).textContent =
+        data.about.type ||
+        "About Me";
+
+
+    document.getElementById(
+        "aboutContent"
+    ).textContent =
+        data.about.text;
+
+}
+
+
+/* =========================================
+   EDUCATION
+========================================= */
+
+function loadEducation() {
+
+    const list =
+        document.getElementById(
+            "educationList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if (
+        !data.education ||
+        data.education.length === 0
+    ) {
+
+        document.getElementById(
+            "educationSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    data.education.forEach(
+        function(edu) {
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "education-item";
+
+
+            const years =
+                (
+                    edu.start ||
+                    edu.end
+                )
+                ?
+                `${escapeHTML(edu.start || "")} - ${escapeHTML(edu.end || "")}`
+                :
+                "";
+
+
+            item.innerHTML = `
+
+                <div class="education-top">
+
+                    <div>
+
+                        <div class="education-degree">
+                            ${escapeHTML(edu.degree || "Degree / Course")}
+                        </div>
+
+                        <div class="education-institution">
+                            ${escapeHTML(edu.institution || "Institution")}
+                        </div>
+
+                    </div>
+
+                    ${
+                        years
+                        ?
+                        `<div class="education-year">
+                            ${years}
+                        </div>`
+                        :
+                        ""
+                    }
+
+                </div>
+
+
+                ${
+                    edu.location
+                    ?
+                    `<div class="education-meta">
+                        📍 ${escapeHTML(edu.location)}
+                    </div>`
+                    :
+                    ""
+                }
+
+
+                ${
+                    edu.description
+                    ?
+                    `<div class="education-description">
+                        ${escapeHTML(edu.description)}
+                    </div>`
+                    :
+                    ""
+                }
+
+            `;
+
+
+            list.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   SKILLS
+========================================= */
+
+function createSkillGroup(
+    title,
+    icon,
+    skills
+) {
+
+    if (
+        !skills ||
+        skills.length === 0
+    ) {
+
+        return "";
+
+    }
+
+
+    let html = `
+
+        <div class="skill-group">
+
+            <div class="skill-group-title">
+                ${icon} ${title}
+            </div>
+
+            <div class="skills-list">
+
+    `;
+
+
+    skills.forEach(
+        function(skill) {
+
+
+            const level =
+                parseInt(
+                    skill.level
+                ) || 0;
+
+
+            html += `
+
+                <div class="skill-card">
+
+                    <div class="skill-card-top">
+
+                        <span class="skill-name">
+                            ${escapeHTML(skill.name || "Skill")}
+                        </span>
+
+                        <span class="skill-level">
+                            ${level}%
+                        </span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:${level}%">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return html;
+
+}
+
+
+function loadSkills() {
+
+    const container =
+        document.getElementById(
+            "skillsContent"
+        );
+
+
+    const skills =
+        data.skills || {};
+
+
+    const hard =
+        skills.hard || [];
+
+
+    const soft =
+        skills.soft || [];
+
+
+    const technical =
+        skills.technical || [];
+
+
+    const html =
+
+        createSkillGroup(
+            "Hard Skills",
+            "💪",
+            hard
+        )
+
+        +
+
+        createSkillGroup(
+            "Soft Skills",
+            "🤝",
+            soft
+        )
+
+        +
+
+        createSkillGroup(
+            "Technical Skills",
+            "💻",
+            technical
+        );
+
+
+    if (!html) {
+
+        document.getElementById(
+            "skillsSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================
+   PROJECTS
+========================================= */
+
+function loadProjects() {
+
+    const list =
+        document.getElementById(
+            "projectList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if (
+        !data.projects ||
+        data.projects.length === 0
+    ) {
+
+        document.getElementById(
+            "projectsSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    data.projects.forEach(
+        function(project) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "project-card";
+
+
+            let imageHTML;
+
+
+            if (project.photo) {
+
+                imageHTML = `
+
+                    <img
+                        src="${project.photo}"
+                        class="project-photo"
+                        alt="Project Photo">
+
+                `;
+
+            }
+
+            else {
+
+                imageHTML = `
+
+                    <div class="project-no-photo">
+                        📁
+                    </div>
+
+                `;
+
+            }
+
+
+            card.innerHTML = `
+
+                ${imageHTML}
+
+                <div class="project-content">
+
+                    <h3>
+                        ${escapeHTML(project.name || "Project")}
+                    </h3>
+
+
+                    ${
+                        project.technologies
+                        ?
+                        `<div class="project-tech">
+                            🛠 ${escapeHTML(project.technologies)}
+                        </div>`
+                        :
+                        ""
+                    }
+
+
+                    ${
+                        project.description
+                        ?
+                        `<div class="project-description">
+                            ${escapeHTML(project.description)}
+                        </div>`
+                        :
+                        ""
+                    }
+
+                </div>
+
+            `;
+
+
+            list.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   EXPERIENCE
+========================================= */
+
+function formatDate(
+    date
+) {
+
+    if (!date) {
+        return "";
+    }
+
+
+    const parts =
+        date.split("-");
+
+
+    if (parts.length !== 3) {
+        return date;
+    }
+
+
+    return `${parts[2]}-${parts[1]}-${parts[0]}`;
+
+}
+
+
+function loadExperience() {
+
+    const list =
+        document.getElementById(
+            "experienceList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if (
+        !data.experience ||
+        data.experience.length === 0
+    ) {
+
+        document.getElementById(
+            "experienceSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    data.experience.forEach(
+        function(exp) {
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "experience-item";
+
+
+            const start =
+                formatDate(
+                    exp.start
+                );
+
+
+            const end =
+                formatDate(
+                    exp.end
+                );
+
+
+            const dateText =
+                start || end
+                ?
+                `${start || ""} - ${end || "Present"}`
+                :
+                "";
+
+
+            item.innerHTML = `
+
+                <div class="experience-head">
+
+                    <div>
+
+                        <div class="experience-type">
+                            ${escapeHTML(exp.type || "Experience")}
+                        </div>
+
+                        <div class="experience-company">
+                            ${escapeHTML(exp.company || "Company")}
+                        </div>
+
+                    </div>
+
+
+                    ${
+                        dateText
+                        ?
+                        `<div class="experience-date">
+                            ${dateText}
+                        </div>`
+                        :
+                        ""
+                    }
+
+                </div>
+
+
+                ${
+                    exp.location
+                    ?
+                    `<div class="experience-location">
+                        📍 ${escapeHTML(exp.location)}
+                    </div>`
+                    :
+                    ""
+                }
+
+
+                ${
+                    exp.description
+                    ?
+                    `<div class="experience-description">
+                        ${escapeHTML(exp.description)}
+                    </div>`
+                    :
+                    ""
+                }
+
+            `;
+
+
+            list.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   RESUME
+========================================= */
+
+function loadResume() {
+
+    const section =
+        document.getElementById(
+            "resumeSection"
+        );
+
+
+    if (
+        !data.resume ||
+        !data.resume.data
+    ) {
+
+        section.classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    const fileName =
+        data.resume.name ||
+        "Resume";
+
+
+    document.getElementById(
+        "resumeName"
+    ).textContent =
+        fileName;
+
+
+    const button =
+        document.getElementById(
+            "resumeButton"
+        );
+
+
+    button.href =
+        data.resume.data;
+
+
+    button.download =
+        fileName;
+
+}
+
+
+/* =========================================
+   CERTIFICATIONS
+========================================= */
+
+function loadCertifications() {
+
+    const list =
+        document.getElementById(
+            "certificationList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if (
+        !data.certifications ||
+        data.certifications.length === 0
+    ) {
+
+        document.getElementById(
+            "certificationSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    data.certifications.forEach(
+        function(cert) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "cert-card";
+
+
+            card.innerHTML = `
+
+                <h3>
+                    🏆 ${escapeHTML(cert.name || "Certification")}
+                </h3>
+
+
+                ${
+                    cert.description
+                    ?
+                    `<div class="cert-description">
+                        ${escapeHTML(cert.description)}
+                    </div>`
+                    :
+                    ""
+                }
+
+
+                ${
+                    cert.file
+                    ?
+                    `<a
+                        href="${cert.file}"
+                        class="cert-download"
+                        target="_blank">
+
+                        📄 View Certificate
+
+                    </a>`
+                    :
+                    ""
+                }
+
+            `;
+
+
+            list.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   SOCIAL LINKS
+========================================= */
+
+function loadSocialLinks() {
+
+    const list =
+        document.getElementById(
+            "socialList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if (!data.social) {
+
+        document.getElementById(
+            "socialSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    const links = [];
+
+
+    if (data.social.linkedin) {
+
+        links.push({
+
+            name: "LinkedIn",
+
+            icon: "💼",
+
+            url: data.social.linkedin
+
+        });
+
+    }
+
+
+    if (data.social.github) {
+
+        links.push({
+
+            name: "GitHub",
+
+            icon: "💻",
+
+            url: data.social.github
+
+        });
+
+    }
+
+
+    if (data.social.website) {
+
+        links.push({
+
+            name: "Website",
+
+            icon: "🌐",
+
+            url: data.social.website
+
+        });
+
+    }
+
+
+    if (data.social.other) {
+
+        links.push({
+
+            name: "Other Link",
+
+            icon: "🔗",
+
+            url: data.social.other
+
+        });
+
+    }
+
+
+    if (links.length === 0) {
+
+        document.getElementById(
+            "socialSection"
+        ).classList.add(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    links.forEach(
+        function(link) {
+
+
+            let url =
+                link.url.trim();
+
+
+            if (
+                !url.startsWith(
+                    "http://"
+                )
+                &&
+                !url.startsWith(
+                    "https://"
+                )
+            ) {
+
+                url =
+                    "https://" + url;
+
+            }
+
+
+            const item =
+                document.createElement(
+                    "a"
+                );
+
+
+            item.className =
+                "social-link";
+
+
+            item.href =
+                url;
+
+
+            item.target =
+                "_blank";
+
+
+            item.rel =
+                "noopener noreferrer";
+
+
+            item.innerHTML = `
+
+                <div class="social-icon">
+                    ${link.icon}
+                </div>
+
+                <span>
+                    ${escapeHTML(link.name)}
+                </span>
+
+            `;
+
+
+            list.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   LOAD EVERYTHING
+========================================= */
+
+loadPersonal();
+
+loadAbout();
+
+loadEducation();
+
+loadSkills();
+
+loadProjects();
+
+loadExperience();
+
+loadResume();
+
+loadCertifications();
+
+loadSocialLinks();
+
+</script>
+
+
+</body>
+
+</html>

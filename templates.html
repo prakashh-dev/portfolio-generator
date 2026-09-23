@@ -1,0 +1,2382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Templates - Portify</title>
+
+<style>
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #080816;
+
+    color: white;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(124,58,237,0.12);
+
+    filter: blur(110px);
+
+    top: -180px;
+    left: -150px;
+
+    animation:
+        bgFloat1 9s ease-in-out infinite;
+
+    pointer-events: none;
+
+    z-index: -2;
+}
+
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(6,182,212,0.10);
+
+    filter: blur(110px);
+
+    right: -160px;
+    bottom: -150px;
+
+    animation:
+        bgFloat2 11s ease-in-out infinite;
+
+    pointer-events: none;
+
+    z-index: -2;
+}
+
+
+@keyframes bgFloat1 {
+
+    0%,100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(100px,80px);
+    }
+}
+
+
+@keyframes bgFloat2 {
+
+    0%,100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(-90px,-70px);
+    }
+}
+
+
+/* =========================================
+   LAYOUT
+========================================= */
+
+.dashboard {
+
+    min-height: 100vh;
+
+    display: flex;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+
+    width: 250px;
+
+    min-height: 100vh;
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    padding: 28px 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35,25,65,0.97),
+            rgba(12,18,40,0.97)
+        );
+
+    border-right:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    backdrop-filter: blur(20px);
+
+    z-index: 50;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+
+    text-align: center;
+
+    font-size: 29px;
+
+    font-weight: 800;
+
+    margin-bottom: 45px;
+}
+
+
+.logo span {
+
+    color: #9b5cff;
+}
+
+
+/* =========================================
+   MENU
+========================================= */
+
+.menu-title {
+
+    color: #777386;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    margin:
+        0 0 15px 10px;
+}
+
+
+.menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.menu a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 14px;
+
+    border-radius: 12px;
+
+    color: #aaa5b8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+.menu a:hover {
+
+    color: white;
+
+    background:
+        rgba(139,92,246,0.12);
+
+    transform:
+        translateX(5px);
+}
+
+
+.menu a.active {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(124,58,237,0.35),
+            rgba(236,72,153,0.15)
+        );
+
+    border:
+        1px solid
+        rgba(155,92,255,0.20);
+}
+
+
+.menu-icon {
+
+    width: 25px;
+
+    text-align: center;
+
+    font-size: 17px;
+}
+
+
+/* =========================================
+   SIDEBAR BOTTOM
+========================================= */
+
+.sidebar-bottom {
+
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+
+    bottom: 25px;
+}
+
+
+.home-btn {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 11px;
+
+    text-align: center;
+
+    color: #aaa5b8;
+
+    text-decoration: none;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.04);
+
+    transition: 0.3s;
+}
+
+
+.home-btn:hover {
+
+    color: white;
+
+    border-color: #9b5cff;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+
+    width:
+        calc(100% - 250px);
+
+    margin-left: 250px;
+
+    padding:
+        35px 45px 70px;
+}
+
+
+/* =========================================
+   TOPBAR
+========================================= */
+
+.topbar {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    margin-bottom: 35px;
+}
+
+
+.page-title h1 {
+
+    font-size: 30px;
+
+    margin-bottom: 7px;
+}
+
+
+.page-title p {
+
+    color: #8f8a9e;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        8px 13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.04);
+}
+
+
+.profile-avatar {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        );
+}
+
+
+.profile-info strong {
+
+    display: block;
+
+    font-size: 13px;
+}
+
+
+.profile-info small {
+
+    color: #858092;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   TEMPLATE CONTAINER
+========================================= */
+
+.template-container {
+
+    max-width: 1150px;
+
+    margin: auto;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.template-intro {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+
+.template-intro h2 {
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+}
+
+
+.template-intro p {
+
+    color: #858092;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   TEMPLATE GRID
+========================================= */
+
+.template-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* =========================================
+   TEMPLATE CARD
+========================================= */
+
+.template-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    backdrop-filter:
+        blur(18px);
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+
+    animation:
+        fadeUp 0.7s ease both;
+}
+
+
+.template-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color:
+        rgba(155,92,255,0.45);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,0.35);
+}
+
+
+/* =========================================
+   TEMPLATE PREVIEW
+========================================= */
+
+.template-preview {
+
+    height: 250px;
+
+    padding: 18px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   TEMPLATE 1
+========================================= */
+
+.preview-one {
+
+    background:
+        linear-gradient(
+            135deg,
+            #171029,
+            #251347
+        );
+}
+
+
+.preview-one .mini-header {
+
+    width: 65%;
+
+    height: 12px;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9b5cff,
+            #ec4899
+        );
+
+    margin-bottom: 18px;
+}
+
+
+.preview-one .mini-circle {
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        );
+
+    margin-bottom: 14px;
+}
+
+
+.preview-one .mini-line {
+
+    height: 7px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    margin-bottom: 9px;
+}
+
+
+.preview-one .mini-line.short {
+
+    width: 55%;
+}
+
+
+.preview-one .mini-boxes {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 8px;
+
+    margin-top: 20px;
+}
+
+
+.preview-one .mini-box {
+
+    height: 65px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+
+/* =========================================
+   TEMPLATE 2
+========================================= */
+
+.preview-two {
+
+    background:
+        linear-gradient(
+            135deg,
+            #081c28,
+            #0d3542
+        );
+}
+
+
+.preview-two .mini-side {
+
+    position: absolute;
+
+    left: 18px;
+    top: 18px;
+    bottom: 18px;
+
+    width: 28%;
+
+    border-radius: 12px;
+
+    background:
+        rgba(0,0,0,0.25);
+
+    border:
+        1px solid
+        rgba(6,182,212,0.25);
+}
+
+
+.preview-two .mini-main {
+
+    margin-left: 34%;
+
+    padding-top: 10px;
+}
+
+
+.preview-two .mini-avatar {
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #3b82f6
+        );
+
+    margin-bottom: 15px;
+}
+
+
+.preview-two .mini-line {
+
+    height: 7px;
+
+    width: 80%;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    margin-bottom: 9px;
+}
+
+
+.preview-two .mini-line.short {
+
+    width: 55%;
+}
+
+
+.preview-two .mini-content {
+
+    margin-top: 25px;
+
+    height: 85px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.07);
+}
+
+
+/* =========================================
+   TEMPLATE 3
+========================================= */
+
+.preview-three {
+
+    background:
+        linear-gradient(
+            135deg,
+            #111111,
+            #252525
+        );
+}
+
+
+.preview-three .mini-top {
+
+    height: 65px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px;
+
+    margin-bottom: 15px;
+}
+
+
+.preview-three .mini-avatar {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background:
+        #eeeeee;
+}
+
+
+.preview-three .mini-name {
+
+    height: 9px;
+
+    width: 80px;
+
+    border-radius: 5px;
+
+    background:
+        #eeeeee;
+}
+
+
+.preview-three .mini-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 10px;
+}
+
+
+.preview-three .mini-card {
+
+    height: 70px;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+}
+
+
+/* =========================================
+   TEMPLATE 4
+========================================= */
+
+.preview-four {
+
+    background:
+        linear-gradient(
+            135deg,
+            #100d29,
+            #32104c
+        );
+}
+
+
+.preview-four .mini-center {
+
+    text-align: center;
+
+    padding-top: 12px;
+}
+
+
+.preview-four .mini-avatar {
+
+    width: 62px;
+    height: 62px;
+
+    border-radius: 50%;
+
+    margin: auto;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ec4899,
+            #8b5cf6
+        );
+
+    margin-bottom: 13px;
+}
+
+
+.preview-four .mini-title {
+
+    width: 100px;
+
+    height: 10px;
+
+    margin: auto;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.8);
+
+    margin-bottom: 10px;
+}
+
+
+.preview-four .mini-subtitle {
+
+    width: 70px;
+
+    height: 6px;
+
+    margin: auto;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.25);
+
+    margin-bottom: 25px;
+}
+
+
+.preview-four .mini-content {
+
+    width: 90%;
+
+    height: 75px;
+
+    margin: auto;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.07);
+}
+
+
+/* =========================================
+   TEMPLATE 5
+========================================= */
+
+.preview-five {
+
+    background:
+        linear-gradient(
+            135deg,
+            #071b14,
+            #123d2c
+        );
+}
+
+
+.preview-five .mini-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    margin-bottom: 22px;
+}
+
+
+.preview-five .mini-logo {
+
+    width: 60px;
+
+    height: 9px;
+
+    border-radius: 5px;
+
+    background:
+        #4ade80;
+}
+
+
+.preview-five .mini-nav {
+
+    width: 100px;
+
+    height: 7px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.18);
+}
+
+
+.preview-five .mini-title {
+
+    width: 75%;
+
+    height: 15px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.8);
+
+    margin-bottom: 12px;
+}
+
+
+.preview-five .mini-text {
+
+    width: 90%;
+
+    height: 7px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    margin-bottom: 8px;
+}
+
+
+.preview-five .mini-projects {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+
+.preview-five .mini-project {
+
+    height: 75px;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,0.07);
+}
+
+
+/* =========================================
+   TEMPLATE 6
+========================================= */
+
+.preview-six {
+
+    background:
+        linear-gradient(
+            135deg,
+            #101827,
+            #182d50
+        );
+}
+
+
+.preview-six .mini-banner {
+
+    height: 60px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #06b6d4
+        );
+
+    margin-bottom: 15px;
+}
+
+
+.preview-six .mini-body {
+
+    display: flex;
+
+    gap: 12px;
+}
+
+
+.preview-six .mini-photo {
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.8);
+}
+
+
+.preview-six .mini-details {
+
+    flex: 1;
+}
+
+
+.preview-six .mini-line {
+
+    height: 7px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.20);
+
+    margin-bottom: 9px;
+}
+
+
+.preview-six .mini-line.short {
+
+    width: 60%;
+}
+
+
+.preview-six .mini-sections {
+
+    margin-top: 22px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 8px;
+}
+
+
+.preview-six .mini-section {
+
+    height: 70px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,0.07);
+}
+
+
+/* =========================================
+   CARD INFO
+========================================= */
+
+.template-info {
+
+    padding:
+        20px;
+}
+
+
+.template-info h3 {
+
+    font-size: 17px;
+
+    margin-bottom: 7px;
+}
+
+
+.template-info p {
+
+    color: #858092;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    min-height: 36px;
+}
+
+
+/* =========================================
+   BADGE
+========================================= */
+
+.template-badge {
+
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    padding:
+        6px 10px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(124,58,237,0.85);
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    z-index: 5;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.template-actions {
+
+    display: flex;
+
+    gap: 9px;
+
+    margin-top: 16px;
+}
+
+
+.preview-btn,
+.use-btn {
+
+    flex: 1;
+
+    padding:
+        10px;
+
+    border-radius: 9px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.preview-btn {
+
+    color: #cbb9ff;
+
+    background:
+        rgba(139,92,246,0.08);
+
+    border:
+        1px solid
+        rgba(155,92,255,0.25);
+}
+
+
+.use-btn {
+
+    color: white;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            100deg,
+            #823cff,
+            #e93f9c
+        );
+}
+
+
+.preview-btn:hover,
+.use-btn:hover {
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================
+   SELECTED
+========================================= */
+
+.template-card.selected {
+
+    border-color:
+        #9b5cff;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(155,92,255,0.15),
+        0 25px 60px
+        rgba(124,58,237,0.20);
+}
+
+
+.selected-label {
+
+    display: none;
+
+    position: absolute;
+
+    top: 14px;
+    left: 14px;
+
+    padding:
+        6px 10px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(34,197,94,0.85);
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    z-index: 10;
+}
+
+
+.template-card.selected
+.selected-label {
+
+    display: block;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.success-message {
+
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    padding:
+        15px 20px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(18,18,38,0.96);
+
+    border:
+        1px solid
+        rgba(72,187,120,0.35);
+
+    color: #9ff0bb;
+
+    font-size: 12px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,0.4);
+
+    transform:
+        translateY(120px);
+
+    opacity: 0;
+
+    transition: 0.4s;
+
+    z-index: 100;
+}
+
+
+.success-message.show {
+
+    transform:
+        translateY(0);
+
+    opacity: 1;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .template-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .sidebar {
+
+        width: 210px;
+    }
+
+    .main {
+
+        width:
+            calc(100% - 210px);
+
+        margin-left: 210px;
+
+        padding: 25px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard {
+
+        display: block;
+    }
+
+    .sidebar {
+
+        position: relative;
+
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 18px;
+
+        border-right: none;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,0.10);
+    }
+
+    .logo {
+
+        margin-bottom: 20px;
+    }
+
+    .menu-title,
+    .sidebar-bottom {
+
+        display: none;
+    }
+
+    .menu {
+
+        flex-direction: row;
+
+        overflow-x: auto;
+    }
+
+    .menu a {
+
+        white-space: nowrap;
+    }
+
+    .main {
+
+        width: 100%;
+
+        margin-left: 0;
+
+        padding:
+            22px 16px 50px;
+    }
+
+    .profile-box {
+
+        display: none;
+    }
+
+    .template-grid {
+
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar">
+
+
+    <div class="logo">
+
+        <span>Port</span>ify
+
+    </div>
+
+
+    <div class="menu-title">
+
+        MAIN MENU
+
+    </div>
+
+
+    <nav class="menu">
+
+
+        <a href="dashboard.html">
+
+            <span class="menu-icon">
+                🏠
+            </span>
+
+            Dashboard
+
+        </a>
+
+
+        <a href="create.html">
+
+            <span class="menu-icon">
+                ➕
+            </span>
+
+            Create Portfolio
+
+        </a>
+
+
+        <a href="preview.html">
+
+            <span class="menu-icon">
+                👁️
+            </span>
+
+            Preview
+
+        </a>
+
+
+        <a href="create.html#projects">
+
+            <span class="menu-icon">
+                📁
+            </span>
+
+            My Projects
+
+        </a>
+
+
+        <a href="templates.html"
+           class="active">
+
+            <span class="menu-icon">
+                🎨
+            </span>
+
+            Templates
+
+        </a>
+
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="index.html"
+           class="home-btn">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+
+        <div class="page-title">
+
+            <h1>
+                Portfolio Templates
+            </h1>
+
+            <p>
+                Choose a professional design for your portfolio
+            </p>
+
+        </div>
+
+
+        <div class="profile-box">
+
+
+            <div class="profile-avatar">
+                👨‍💻
+            </div>
+
+
+            <div class="profile-info">
+
+                <strong id="topUserName">
+                    Portfolio Creator
+                </strong>
+
+                <small>
+                    Portfolio Creator
+                </small>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- TEMPLATE CONTAINER -->
+
+    <div class="template-container">
+
+
+        <div class="template-intro">
+
+            <h2>
+                Choose Your Template
+            </h2>
+
+            <p>
+                Select a design that matches your professional style.
+                Your portfolio information will remain unchanged.
+            </p>
+
+        </div>
+
+
+
+        <div class="template-grid">
+
+
+
+            <!-- =================================
+                 TEMPLATE 1
+            ================================== -->
+
+            <div class="template-card"
+                 data-template="modern">
+
+
+                <span class="template-badge">
+                    POPULAR
+                </span>
+
+
+                <span class="selected-label">
+                    ✓ SELECTED
+                </span>
+
+
+                <div class="template-preview preview-one">
+
+
+                    <div class="mini-header"></div>
+
+
+                    <div class="mini-circle"></div>
+
+
+                    <div class="mini-line"></div>
+
+
+                    <div class="mini-line short"></div>
+
+
+                    <div class="mini-boxes">
+
+                        <div class="mini-box"></div>
+                        <div class="mini-box"></div>
+                        <div class="mini-box"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="template-info">
+
+                    <h3>
+                        Modern Purple
+                    </h3>
+
+                    <p>
+                        A stylish dark portfolio with
+                        purple and pink gradient effects.
+                    </p>
+
+
+                    <div class="template-actions">
+
+                        <button
+                            class="preview-btn"
+                            onclick="previewTemplate('modern')">
+
+                            👁 Preview
+
+                        </button>
+
+
+                        <button
+                            class="use-btn"
+                            onclick="useTemplate('modern')">
+
+                            ✓ Use Template
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 TEMPLATE 2
+            ================================== -->
+
+            <div class="template-card"
+                 data-template="ocean">
+
+
+                <span class="selected-label">
+                    ✓ SELECTED
+                </span>
+
+
+                <div class="template-preview preview-two">
+
+
+                    <div class="mini-side"></div>
+
+
+                    <div class="mini-main">
+
+                        <div class="mini-avatar"></div>
+
+                        <div class="mini-line"></div>
+
+                        <div class="mini-line short"></div>
+
+                        <div class="mini-content"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="template-info">
+
+                    <h3>
+                        Ocean Blue
+                    </h3>
+
+                    <p>
+                        A clean professional layout
+                        using blue and cyan accents.
+                    </p>
+
+
+                    <div class="template-actions">
+
+                        <button
+                            class="preview-btn"
+                            onclick="previewTemplate('ocean')">
+
+                            👁 Preview
+
+                        </button>
+
+
+                        <button
+                            class="use-btn"
+                            onclick="useTemplate('ocean')">
+
+                            ✓ Use Template
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 TEMPLATE 3
+            ================================== -->
+
+            <div class="template-card"
+                 data-template="minimal">
+
+
+                <span class="selected-label">
+                    ✓ SELECTED
+                </span>
+
+
+                <div class="template-preview preview-three">
+
+
+                    <div class="mini-top">
+
+                        <div class="mini-avatar"></div>
+
+                        <div class="mini-name"></div>
+
+                    </div>
+
+
+                    <div class="mini-grid">
+
+                        <div class="mini-card"></div>
+
+                        <div class="mini-card"></div>
+
+                        <div class="mini-card"></div>
+
+                        <div class="mini-card"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="template-info">
+
+                    <h3>
+                        Minimal Black
+                    </h3>
+
+                    <p>
+                        Simple, elegant and clean design
+                        for a professional presentation.
+                    </p>
+
+
+                    <div class="template-actions">
+
+                        <button
+                            class="preview-btn"
+                            onclick="previewTemplate('minimal')">
+
+                            👁 Preview
+
+                        </button>
+
+
+                        <button
+                            class="use-btn"
+                            onclick="useTemplate('minimal')">
+
+                            ✓ Use Template
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 TEMPLATE 4
+            ================================== -->
+
+            <div class="template-card"
+                 data-template="creative">
+
+
+                <span class="selected-label">
+                    ✓ SELECTED
+                </span>
+
+
+                <div class="template-preview preview-four">
+
+
+                    <div class="mini-center">
+
+                        <div class="mini-avatar"></div>
+
+                        <div class="mini-title"></div>
+
+                        <div class="mini-subtitle"></div>
+
+                        <div class="mini-content"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="template-info">
+
+                    <h3>
+                        Creative Gradient
+                    </h3>
+
+                    <p>
+                        A creative centered portfolio
+                        for designers and developers.
+                    </p>
+
+
+                    <div class="template-actions">
+
+                        <button
+                            class="preview-btn"
+                            onclick="previewTemplate('creative')">
+
+                            👁 Preview
+
+                        </button>
+
+
+                        <button
+                            class="use-btn"
+                            onclick="useTemplate('creative')">
+
+                            ✓ Use Template
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 TEMPLATE 5
+            ================================== -->
+
+            <div class="template-card"
+                 data-template="green">
+
+
+                <span class="selected-label">
+                    ✓ SELECTED
+                </span>
+
+
+                <div class="template-preview preview-five">
+
+
+                    <div class="mini-header">
+
+                        <div class="mini-logo"></div>
+
+                        <div class="mini-nav"></div>
+
+                    </div>
+
+
+                    <div class="mini-title"></div>
+
+
+                    <div class="mini-text"></div>
+
+                    <div class="mini-text"></div>
+
+
+                    <div class="mini-projects">
+
+                        <div class="mini-project"></div>
+
+                        <div class="mini-project"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="template-info">
+
+                    <h3>
+                        Fresh Green
+                    </h3>
+
+                    <p>
+                        A modern fresh design with
+                        green professional accents.
+                    </p>
+
+
+                    <div class="template-actions">
+
+                        <button
+                            class="preview-btn"
+                            onclick="previewTemplate('green')">
+
+                            👁 Preview
+
+                        </button>
+
+
+                        <button
+                            class="use-btn"
+                            onclick="useTemplate('green')">
+
+                            ✓ Use Template
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 TEMPLATE 6
+            ================================== -->
+
+            <div class="template-card"
+                 data-template="corporate">
+
+
+                <span class="selected-label">
+                    ✓ SELECTED
+                </span>
+
+
+                <div class="template-preview preview-six">
+
+
+                    <div class="mini-banner"></div>
+
+
+                    <div class="mini-body">
+
+                        <div class="mini-photo"></div>
+
+
+                        <div class="mini-details">
+
+                            <div class="mini-line"></div>
+
+                            <div class="mini-line short"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mini-sections">
+
+                        <div class="mini-section"></div>
+
+                        <div class="mini-section"></div>
+
+                        <div class="mini-section"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="template-info">
+
+                    <h3>
+                        Corporate Blue
+                    </h3>
+
+                    <p>
+                        A professional corporate layout
+                        suitable for IT and business profiles.
+                    </p>
+
+
+                    <div class="template-actions">
+
+                        <button
+                            class="preview-btn"
+                            onclick="previewTemplate('corporate')">
+
+                            👁 Preview
+
+                        </button>
+
+
+                        <button
+                            class="use-btn"
+                            onclick="useTemplate('corporate')">
+
+                            ✓ Use Template
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     SUCCESS MESSAGE
+========================================= -->
+
+<div class="success-message"
+     id="successMessage">
+
+    ✓ Template selected successfully!
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   USER NAME
+========================================= */
+
+const savedUser =
+    localStorage.getItem("portifyUser");
+
+
+if (savedUser) {
+
+    document.getElementById(
+        "topUserName"
+    ).textContent = savedUser;
+
+}
+
+
+/* =========================================
+   CURRENT TEMPLATE
+========================================= */
+
+let selectedTemplate =
+    localStorage.getItem(
+        "portifyTemplate"
+    );
+
+
+if (!selectedTemplate) {
+
+    selectedTemplate =
+        "modern";
+
+    localStorage.setItem(
+        "portifyTemplate",
+        selectedTemplate
+    );
+
+}
+
+
+/* =========================================
+   SHOW SELECTED TEMPLATE
+========================================= */
+
+function showSelectedTemplate() {
+
+    const cards =
+        document.querySelectorAll(
+            ".template-card"
+        );
+
+
+    cards.forEach(
+        function(card) {
+
+            const template =
+                card.dataset.template;
+
+
+            if (
+                template === selectedTemplate
+            ) {
+
+                card.classList.add(
+                    "selected"
+                );
+
+            }
+
+            else {
+
+                card.classList.remove(
+                    "selected"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+showSelectedTemplate();
+
+
+/* =========================================
+   USE TEMPLATE
+========================================= */
+
+function useTemplate(templateName) {
+
+    selectedTemplate =
+        templateName;
+
+
+    localStorage.setItem(
+        "portifyTemplate",
+        templateName
+    );
+
+
+    showSelectedTemplate();
+
+
+    showSuccess();
+
+
+    setTimeout(
+        function() {
+
+            window.location.href =
+                "preview.html";
+
+        },
+        800
+    );
+
+}
+
+
+/* =========================================
+   PREVIEW TEMPLATE
+========================================= */
+
+function previewTemplate(templateName) {
+
+    localStorage.setItem(
+        "portifyTemplatePreview",
+        templateName
+    );
+
+
+    window.location.href =
+        "preview.html";
+
+}
+
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+function showSuccess() {
+
+    const message =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    message.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        function() {
+
+            message.classList.remove(
+                "show"
+            );
+
+        },
+        1800
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
